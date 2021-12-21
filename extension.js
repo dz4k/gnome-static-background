@@ -56,9 +56,6 @@ function disable() {
 function animateOpenOverview() {
 	const controls = Main.overview._overview._controls;
 
-	console.log("qq_wdk", Object.keys(controls._workspacesDisplay), Object.keys(controls._workspacesDisplay._controls), Object.keys(controls._workspacesDisplay._workspacesViews));
-
-
 	// Animate dash
 
 	controls.dash.translation_y = controls.dash.height;
