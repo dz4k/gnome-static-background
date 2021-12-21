@@ -42,13 +42,12 @@ function enable() {
 }
 
 function disable() {
-	while (bgManagers.length > 0) {
-		let mgr = bgManagers.shift();
+	for (const mgr in bgManagers) {
 		Main.overview._overview._controls._stateAdjustment.disconnect(mgr._fadeSignal);
 		mgr.destroy();
 	}
+	bgManagers = [];
 
-	//
 	overrideProto(OverviewControls.ControlsManager.prototype, savedControlsProto);
 	overrideProto(Workspace.Workspace.prototype, savedWorkspaceProto);
 }
