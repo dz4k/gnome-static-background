@@ -1,0 +1,12 @@
+{
+    "name" : "Static background in overview",
+    "description" : "The background, always clearly visible.",
+    "original-author": "rens.althuis@gmail.com",
+    "shell-version" : [
+        "40",
+        "41"
+    ],
+    "url" : "",
+    "uuid" : "static-background@denizaksimsek.com",
+    "version" : 1
+}
