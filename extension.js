@@ -2,13 +2,10 @@
 const { Clutter, GLib, GObject, Graphene, Meta, St } = imports.gi;
 
 const Background = imports.ui.background;
-const DND = imports.ui.dnd;
 const Main = imports.ui.main;
 const Overview = imports.ui.overview;
 const OverviewControls = imports.ui.overviewControls;
-const Params = imports.misc.params;
 const Util = imports.misc.util;
-const { WindowPreview } = imports.ui.windowPreview;
 const Workspace = imports.ui.workspace;
 
 var bgManagers = [];
@@ -56,22 +53,20 @@ function animateOpenOverview() {
 	const controls = Main.overview._overview._controls;
 
 	// Animate dash
-
-	controls.dash.translation_y = controls.dash.height;
-	controls.dash.ease({ translation_y: 0, duration: Overview.ANIMATION_TIME })
-
-
+	if (isDashToDock()) {
+		controls.dash.translation_y = 0;
+	} else {
+		controls.dash.translation_y = controls.dash.height;
+		controls.dash.ease({ translation_y: 0, duration: Overview.ANIMATION_TIME });
+	}
+	
 	// Animate search
-
 	controls._searchEntry.opacity = 0;
 	controls._searchEntry.ease({ opacity: 255, duration: Overview.ANIMATION_TIME })
 
-
 	// Animate workspace switcher
-
 	controls._thumbnailsBox._indicator.opacity = 0;
 	controls._thumbnailsBox._indicator.ease({ opacity: 255, duration: Overview.ANIMATION_TIME })
-
 	controls._thumbnailsBox._thumbnails.forEach(thumbnail => {
 		thumbnail.opacity = 0;
 		thumbnail.ease({ opacity: 255, duration: Overview.ANIMATION_TIME });
@@ -82,23 +77,26 @@ function animateCloseOverview() {
 	const controls = Main.overview._overview._controls;
 
 	// Animate dash
-
-	controls.dash.ease({ translation_y: controls.dash.height, duration: Overview.ANIMATION_TIME })
-
-
+	if (isDashToDock()) {
+		controls.dash.translation_y = 0;
+	} else {
+		controls.dash.ease({ translation_y: controls.dash.height, duration: Overview.ANIMATION_TIME });
+	}
 
 	// Animate search
-
 	controls._searchEntry.ease({ opacity: 0, duration: Overview.ANIMATION_TIME })
 
-
 	// Animate workspace switcher
-
 	controls._thumbnailsBox._indicator.ease({ opacity: 0, duration: Overview.ANIMATION_TIME })
-
 	controls._thumbnailsBox._thumbnails.forEach(thumbnail => {
 		thumbnail.ease({ opacity: 0, duration: Overview.ANIMATION_TIME });
 	})
+}
+
+// Hack to detect if Dash to Dock or a fork thereof is enabled
+function isDashToDock() {
+	global.log("indash", Object.keys(Main.overview.dash));
+	return '_position' in Main.overview.dash;
 }
 
 function overrideProto(proto, overrides) {
@@ -220,5 +218,4 @@ ControlsOverride = {
 		savedControlsProto.animateFromOverview.call(this, ...arguments);
 		animateCloseOverview();
 	},
-	
 }
