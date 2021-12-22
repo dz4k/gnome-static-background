@@ -42,7 +42,7 @@ function enable() {
 }
 
 function disable() {
-	for (const mgr in bgManagers) {
+	for (const mgr of bgManagers) {
 		Main.overview._overview._controls._stateAdjustment.disconnect(mgr._fadeSignal);
 		mgr.destroy();
 	}
