@@ -4,7 +4,8 @@
     "original-author": "rens.althuis@gmail.com",
     "shell-version" : [
         "40",
-        "41"
+        "41",
+        "42"
     ],
     "url" : "https://github.com/dz4k/gnome-static-background",
     "uuid" : "static-background@denizaksimsek.com",
