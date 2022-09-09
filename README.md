@@ -1,8 +1,17 @@
 
 
-## Static Wallpaper in Overview
+# Static Wallpaper in Overview
 
 _a GNOME shell extension_
+
+## Seeking maintainer
+
+I don't have the time or drive to dive deep enough into GNOME to competently 
+maintain this extension. Besides, I don't even use it myself anymore. If you're
+interested in taking over this project, my contact info is on my website:
+https://www.denizaksimsek.com/
+
+* * *
 
 ![In the overview, the wallpaper remains fullscreen and the workspaces have no individual background](screenshot.png)
 
