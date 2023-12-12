@@ -3,11 +3,6 @@
     "description" : "The background, always clearly visible.",
     "original-author": "rens.althuis@gmail.com",
     "shell-version" : [
-        "40",
-        "41",
-        "42",
-        "43",
-        "44",
         "45"
     ],
     "url" : "https://github.com/dz4k/gnome-static-background",
